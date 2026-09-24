@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
 	<meta charset="UTF-8">
-	<title>Registro Libro Elitec</title>
+	<title>Lista Enfermera Elitec</title>
 	<script src="js/bootstrap.js" type="text/javascript"></script>
 	<script src="js/bootstrap.bundle.js" type="text/javascript"></script>
 	<script src="js/bootstrap.esm.js" type="text/javascript"></script>
 	<script src="js/jquery-4.0.0.min.js" type="text/javascript"></script>
 	<script src="js/datatables.js" type="text/javascript"></script>
-	
+
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/bootstrap-grid.css" rel="stylesheet">
 	<link href="css/bootstrap-reboot.css" rel="stylesheet">
@@ -18,63 +17,63 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Lista de Libro por título</h1>
-		
+		<h1>Lista de Enfermera por nombre</h1>
+
 		<div class="row" style="margin-top: 2%;">
 			<div class="col-3">
-					<label for="titulo">Título</label> 
+					<label for="nombres">Nombres</label>
 			</div>
 			<div class="col-6">
-					<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingrese el título" maxlength="30">
+					<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese el nombre" maxlength="50">
 			</div>
 			<div class="col-3">
                     <button class="btn btn-primary" id="btnBuscar"style="width: 200px">Buscar</button>
-            </div>        
+            </div>
 		</div>
-		
+
 		<div class="row" style="margin-top: 2%;">
             <div class="col-12">
                 <table class="table table-striped" id="id_table">
                     <thead>
                         <tr><th>Código</th>
-                            <th>Registro</th>
-                            <th>Título</th>
-                            <th>País</th>
-                            <th>Autor</th>
-                            <th>Fecha de Creación</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>DNI</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Especialidad</th>
+                            <th>Teléfono</th>
+                            <th>Turno</th>
                         </tr>
                     </thead>
                     <tbody >
- 
+
                     </tbody>
                 </table>
           </div>
-		
-			
-			
+        </div>
+
 	</div>
-</body>
 
 <script type="text/javascript">
 
 $("#btnBuscar").click(function (e) {
-	
-	var varTitulo = $("#titulo").val();
-	console.log(">>> titulo: " , varTitulo);
-	
+
+	var varNombres = $("#nombres").val();
+	console.log(">>> nombres: " , varNombres);
+
 	$.ajax({
-		url: "listaLibroPorTitulo",
+		url: "listaEnfermeraPorNombre",
 		type: "GET",
-		data: {titulo: varTitulo},
+		data: {nombres: varNombres},
 		success: function (response) {
 			console.log(">>> response: " , response);
 			agregarGrilla(response);
 		},
 		error: function () {
-			alert("Error al buscar libros por título.");
+			alert("Error al buscar enfermeras por nombre.");
 		}
 	});
-	
+
 });
 
 
@@ -95,15 +94,17 @@ function agregarGrilla(lista){
 	            loadingIndicator: true
 	        },
 			columns:[
-				{data: "idLibro",className:'text-center'},
-				{data: "registro",className:'text-center'},
-				{data: "titulo",className:'text-center'},
-				{data: "pais", className:'text-center'},
-				{data: "autor", className:'text-center'},
+				{data: "idEnfermera",className:'text-center'},
+				{data: "nombres",className:'text-center'},
+				{data: "apellidos",className:'text-center'},
+				{data: "dni", className:'text-center'},
 				{data: function(row, type, val, meta){
-					return row.fechaCreacion.day + "/" + row.fechaCreacion.month + "/" + row.fechaCreacion.year;  
+					return row.fechaNacimiento.day + "/" + row.fechaNacimiento.month + "/" + row.fechaNacimiento.year;
 				},className:'text-center'},
-			]                                     
+				{data: "especialidad", className:'text-center'},
+				{data: "telefono", className:'text-center'},
+				{data: "turno", className:'text-center'},
+			]
 	    });
 }
 
@@ -122,12 +123,8 @@ function agregarGrilla(lista){
 	        "previous":   "Anterior"
 	    }
 	};
-	
+
 </script>
 
-
-</html>
-			
-	</div>
 </body>
 </html>
