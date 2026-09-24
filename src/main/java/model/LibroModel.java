@@ -2,6 +2,9 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Libro;
 import util.MySqlDBConexion;
@@ -47,4 +50,59 @@ public class LibroModel {
 
 		return salida;
 	}
+	
+	public List<Libro> listaLibroPorTitulo (String titulo){
+		ArrayList<Libro> salida = new ArrayList<Libro>();
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			//1 se crea conexion
+			conn = MySqlDBConexion.getConexion();
+			
+			//2 se prepara la sentencia SQL
+			String sql = "SELECT * FROM libro WHERE titulo LIKE ?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, "%" + titulo + "%");
+			
+			//3 se ejecuta la consulta
+			rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				Libro obj = new Libro();
+				obj.setIdLibro(rs.getInt("idLibro"));
+				obj.setRegistro(rs.getString("registro"));
+				obj.setTitulo(rs.getString("titulo"));
+				obj.setPais(rs.getString("pais"));
+				obj.setAutor(rs.getString("autor"));
+				obj.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+
+				salida.add(obj);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return salida;
+	}
+	
 }
+
+
+
+
+
+

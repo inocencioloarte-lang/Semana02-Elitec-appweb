@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Registro de Publicacion / Elitec</title>
+	<script src="js/bootstrap.js" type="text/javascript"></script>
+	<script src="js/bootstrap.bundle.js" type="text/javascript"></script>
+	<script src="js/bootstrap.esm.js" type="text/javascript"></script>
+	<script src="js/jquery-4.0.0.min.js" type="text/javascript"></script>
+	
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-grid.css" rel="stylesheet">
+	<link href="css/bootstrap-reboot.css" rel="stylesheet">
+	<link href="css/bootstrap-utilities.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+			<h1>Registro de Publicacion</h1>
+			<form id="formPublicacion" method="post" novalidate >
+				<div class="row" style="margin-top: 2%;">
+					<div class="col-3">
+						<label for="usuario">Usuario</label> 
+						<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese el usuario" maxlength="30" required>
+						<div class="invalid-feedback">Ingrese el usuario</div>
+					</div>
+					<div class="col-9">
+						<label for="titulo">Título</label> 
+						<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingrese el título" maxlength="30" required>
+						<div class="invalid-feedback">Ingrese el título</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 2%;">	
+					<div class="col-4">
+						<label for="contenido">Contenido</label> 
+						<input type="text" class="form-control" id="contenido" name="contenido" placeholder="Ingrese el contenido" maxlength="30" required>
+						<div class="invalid-feedback">Ingrese el contenido</div>
+					</div>
+					<div class="col-4">
+						<label for="autor">Referencias</label> 
+						<input type="text" class="form-control" id="referencias" name="referencias" placeholder="Ingrese la referencia" maxlength="30" required>
+						<div class="invalid-feedback">Ingrese las referencias</div>
+					</div>
+					<div class="col-4">
+						<label for="fecha">Fecha de publicacion</label> 
+						<input type="date" class="form-control" id="fecha" name="fecha" required>
+						<div class="invalid-feedback">Ingrese la Fecha de Publicacion</div>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="margin-top: 2%">
+					<button class="btn btn-primary" id="btnRegistrar"style="width: 200px">Registrar</button>
+				</div>
+			</form>
+		</div>
+		
+		<script type="text/javascript">
+			$("#btnRegistrar").click(function(e) {
+				console.log("click en registrar");		
+				e.preventDefault(); //Evita que el formulario se envíe automáticamente
+		
+				
+				let form = $('#formPublicacion')[0];
+		        if (form.checkValidity() === false) {
+		            $(form).addClass('was-validated');
+		            return;
+		        }
+		
+		     
+		        $.ajax({
+					url: 'registraPublicacionAlias',
+					type: 'POST',
+					data: $(form).serialize(),
+					success: function (response) {
+						
+						console.log('response >>> '+ response);
+						//limpiar el formulario
+						$('#formPublicacion')[0].reset();
+						
+						//limpiar las validaciones
+						$('#formPublicacion').removeClass('was-validated');
+						
+						//enviar un mensaje de éxito al usuario en forma de div que dure 3 segundos
+						$('#formPublicacion').prepend('<div class="alert alert-success" role="alert">'+ response.mensajeSalida +'</div>');
+						setTimeout(function () {
+							$('.alert').remove();
+						}, 3000);
+					},
+					error: function (xhr, status, error) {
+						// Manejar errores aquí
+						console.error('Error al registrar :', error);
+					}
+				});
+			});
+		</script>
+
+</body>
+</html>

@@ -651,7 +651,7 @@
           throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
         }
       }
-    }
+    } 
   }
 
   /**
