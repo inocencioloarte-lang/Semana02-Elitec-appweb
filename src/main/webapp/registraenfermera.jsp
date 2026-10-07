@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,99 +17,121 @@
 </head>
 <body>
 	<div class="container">
-			<h1>Registro de Enfermera</h1>
-			<form id="formEnfermera" method="post" novalidate >
-				<div class="row" style="margin-top: 2%;">
-					<div class="col-6">
-						<label for="nombres">Nombres</label>
-						<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese los nombres" maxlength="50" required>
-						<div class="invalid-feedback">Ingrese los nombres</div>
-					</div>
-					<div class="col-6">
-						<label for="apellidos">Apellidos</label>
-						<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese los apellidos" maxlength="50" required>
-						<div class="invalid-feedback">Ingrese los apellidos</div>
-					</div>
+		<h1>Registro de Enfermera</h1>
+		<form id="formEnfermera" method="post" novalidate>
+			<div class="row" style="margin-top: 2%;">
+				<div class="col-6">
+					<label for="nombres">Nombres</label>
+					<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese los nombres" maxlength="50" required>
+					<div class="invalid-feedback">Ingrese los nombres</div>
 				</div>
-				<div class="row" style="margin-top: 2%;">
-					<div class="col-3">
-						<label for="dni">DNI</label>
-						<input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" maxlength="8" required>
-						<div class="invalid-feedback">Ingrese el DNI</div>
-					</div>
-					<div class="col-3">
-						<label for="fechaNacimiento">Fecha de Nacimiento</label>
-						<input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
-						<div class="invalid-feedback">Ingrese la fecha de nacimiento</div>
-					</div>
-					<div class="col-3">
-						<label for="especialidad">Especialidad</label>
-						<input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Ingrese la especialidad" maxlength="50" required>
-						<div class="invalid-feedback">Ingrese la especialidad</div>
-					</div>
-					<div class="col-3">
-						<label for="telefono">Teléfono</label>
-						<input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el teléfono" maxlength="15" required>
-						<div class="invalid-feedback">Ingrese el teléfono</div>
-					</div>
+				<div class="col-6">
+					<label for="apellidos">Apellidos</label>
+					<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese los apellidos" maxlength="50" required>
+					<div class="invalid-feedback">Ingrese los apellidos</div>
 				</div>
-				<div class="row" style="margin-top: 2%;">
-					<div class="col-4">
-						<label for="turno">Turno</label>
-						<select class="form-control" id="turno" name="turno" required>
-							<option value="" selected disabled>Seleccione un turno</option>
-							<option value="Mañana">Mañana</option>
-							<option value="Tarde">Tarde</option>
-							<option value="Noche">Noche</option>
-						</select>
-						<div class="invalid-feedback">Seleccione un turno</div>
-					</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="col-3">
+					<label for="dni">DNI</label>
+					<input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" maxlength="8" required>
+					<div class="invalid-feedback">Ingrese el DNI</div>
 				</div>
-				<div class="row justify-content-center" style="margin-top: 2%">
-					<button class="btn btn-primary" id="btnRegistrar"style="width: 200px">Registrar</button>
+				<div class="col-3">
+					<label for="fechaNacimiento">Fecha de Nacimiento</label>
+					<input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+					<div class="invalid-feedback">Ingrese la fecha de nacimiento</div>
 				</div>
-			</form>
-		</div>
+				<div class="col-3">
+					<label for="especialidad">Especialidad</label>
+					<input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Ingrese la especialidad" maxlength="50" required>
+					<div class="invalid-feedback">Ingrese la especialidad</div>
+				</div>
+				<div class="col-3">
+					<label for="telefono">TelÃ©fono</label>
+					<input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telÃ©fono" maxlength="15" required>
+					<div class="invalid-feedback">Ingrese el telÃ©fono</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 2%;">
+				<div class="col-4">
+					<label for="turno">Turno</label>
+					<select class="form-control" id="turno" name="turno" required>
+						<option value="" selected disabled>Seleccione un turno</option>
+						<option value="MaÃ±ana">MaÃ±ana</option>
+						<option value="Tarde">Tarde</option>
+						<option value="Noche">Noche</option>
+					</select>
+					<div class="invalid-feedback">Seleccione un turno</div>
+				</div>
+				<div class="col-4">
+					<label for="tipo">Tipo</label>
+					<select class="form-control" id="tipo" name="tipo" required>
+						<option value="">Seleccione un tipo</option>
+					</select>
+					<div class="invalid-feedback">Seleccione un tipo</div>
+				</div>
+			</div>
+			<div class="row justify-content-center" style="margin-top: 2%">
+				<button class="btn btn-primary" id="btnRegistrar" style="width: 200px">Registrar</button>
+			</div>
+		</form>
+	</div>
 
-		<script type="text/javascript">
-			$("#btnRegistrar").click(function(e) {
-				console.log("click en registrar");
-				e.preventDefault(); //Evita que el formulario se envíe automáticamente
-
-
-				let form = $('#formEnfermera')[0];
-		        if (form.checkValidity() === false) {
-		            $(form).addClass('was-validated');
-		            return;
-		        }
-
-
-		        $.ajax({
-					url: 'registraEnfermeraAlias',
-					type: 'POST',
-					data: $(form).serialize(),
-					success: function (response) {
-
-						console.log('response >>> '+ response);
-						//limpiar el formulario
-						$('#formEnfermera')[0].reset();
-
-						//limpiar las validaciones
-						$('#formEnfermera').removeClass('was-validated');
-
-						//enviar un mensaje de éxito al usuario en forma de div que dure 3 segundos
-						$('#formEnfermera').prepend('<div class="alert alert-success" role="alert">'+ response.mensajeSalida +'</div>');
-						setTimeout(function () {
-							$('.alert').remove();
-						}, 3000);
-					},
-					error: function (xhr, status, error) {
-						// Manejar errores aquí
-						console.error('Error al registrar :', error);
-					}
-				});
+	<script type="text/javascript">
+		// Cargar el combo de Tipo al abrir la pÃ¡gina
+		$(document).ready(function () {
+			$.ajax({
+				url: 'cargaComboTipoAlias',
+				type: 'GET',
+				success: function (data) {
+					console.log('Tipos cargados:', data);
+					var comboBox = $('#tipo');
+					data.forEach(function (obj) {
+						comboBox.append('<option value="' + obj.idTipo + '">' + obj.descripcion + '</option>');
+					});
+				},
+				error: function (xhr, status, error) {
+					console.error('Error al cargar tipos:', error);
+				}
 			});
-		</script>
+		});
+
+		// Registrar enfermera
+		$("#btnRegistrar").click(function(e) {
+			console.log("click en registrar");
+			e.preventDefault(); //Evita que el formulario se envÃ­e automÃ¡ticamente
+
+			let form = $('#formEnfermera')[0];
+			if (form.checkValidity() === false) {
+				$(form).addClass('was-validated');
+				return;
+			}
+
+			$.ajax({
+				url: 'registroEnfermeraAlias',
+				type: 'POST',
+				data: $(form).serialize(),
+				success: function (response) {
+					console.log('response >>> ' + response);
+					//limpiar el formulario
+					$('#formEnfermera')[0].reset();
+
+					//limpiar las validaciones
+					$('#formEnfermera').removeClass('was-validated');
+
+					//mensaje que dura 3 segundos
+					$('#formEnfermera').prepend('<div class="alert alert-success" role="alert">' + response.mensajeSalida + '</div>');
+					setTimeout(function () {
+						$('.alert').remove();
+					}, 3000);
+				},
+				error: function (xhr, status, error) {
+					console.error('Error al registrar :', error);
+				}
+			});
+		});
+	</script>
 
 </body>
 </html>
